@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ImportPassphrase } from "./importPassphrase";
+import { useRouter } from "next/router";
 
 interface AccountSetupProps {
   setupAccount: (passphrase: string) => Promise<void>;
@@ -7,10 +8,13 @@ interface AccountSetupProps {
 }
 
 const AccountSetup: FC<AccountSetupProps> = ({ setupAccount, createAccount }) => {
+  const router = useRouter();
+
   async function createNewAccount() {
     try {
       const passphrase = await createAccount();
       await setupAccount(passphrase);
+      router.reload();
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +34,13 @@ const AccountSetup: FC<AccountSetupProps> = ({ setupAccount, createAccount }) =>
       <h3 className="text-center my-6 opacity-70 text-2xl">OR</h3>
       <section>
         <h3 className="mb-4 lg:text-lg font-medium">Import Passphrase</h3>
-        <ImportPassphrase setupAccount={setupAccount} numberOfWords={24} />
+        <ImportPassphrase
+          setupAccount={async (passphrase) => {
+            await setupAccount(passphrase);
+            router.reload();
+          }}
+          numberOfWords={24}
+        />
       </section>
     </div>
   );
