@@ -11,10 +11,12 @@ const AccountSetup: FC<AccountSetupProps> = ({ setupAccount, createAccount }) =>
     try {
       const passphrase = await createAccount();
       await setupAccount(passphrase);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   return (
-    <div className="p-4 lg:p-8">
+    <div className="p-4 lg:p-8 max-w-5xl">
       <h3 className="mb-8 text-xl lg:text-4xl">Authenticate to continue</h3>
       <section className="text-center p-8 dark:border-neutral-800 border-gray-300 border rounded-xl">
         <button
