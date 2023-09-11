@@ -1,12 +1,11 @@
-import { Inter } from "next/font/google";
 import { Home } from "@/components/home";
+import { NextPageWithLayout } from "./_app";
+import { Layout } from "@/components/layout";
 
-const inter = Inter({ subsets: ["latin"] });
+const HomePage: NextPageWithLayout = () => {
+  return <Home />;
+};
 
-export default function HomePage() {
-  return (
-    <main className={`flex min-h-screen flex-col items-center p-24 ${inter.className}`}>
-      <Home />
-    </main>
-  );
-}
+HomePage.getLayout = (page) => <Layout>{page}</Layout>;
+
+export default HomePage;
