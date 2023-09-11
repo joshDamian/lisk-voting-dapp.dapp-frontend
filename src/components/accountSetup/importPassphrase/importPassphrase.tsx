@@ -92,7 +92,7 @@ const ImportPassphrase: FC<ImportPassphraseProps> = ({
             </div>
             <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {[...Array(numberOfWords)].map((x, i) => (
-                <div key={x}>
+                <div key={i}>
                   <input
                     autoFocus={i === 0}
                     id={`${i}`}
