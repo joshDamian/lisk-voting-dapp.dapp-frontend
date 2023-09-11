@@ -19,6 +19,10 @@ export const setupAccount = async (passphrase: string) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(account));
 };
 
+export const resetAccount = () => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(null));
+};
+
 export const getAccount = (): Account | null => {
   if (typeof window === "undefined") return null;
   const account = localStorage.getItem(LOCAL_STORAGE_KEY);
