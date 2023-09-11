@@ -17,7 +17,7 @@ const Polls: FC<PollsProps> = ({ userAddress, getPollIds, getPoll }) => {
   if (error) return <div>Error loading polls</div>;
   if (!pollIds) return <div>Loading</div>;
   return (
-    <section className="max-w-3xl w-full mx-auto flex flex-col gap-6">
+    <section className="flex flex-col gap-6">
       {pollIds.map((pollId) => (
         <PollCard
           key={pollId}

@@ -5,6 +5,7 @@ import { getPoll, getPollIds } from "@/api/poll";
 import { Account } from "./account";
 import { getAccount } from "@/api/account";
 import { resetAccount } from "@/utils/account";
+import Link from "next/link";
 
 interface PlatformProps {
   account: {
@@ -15,7 +16,7 @@ interface PlatformProps {
 
 const Platform: FC<PlatformProps> = ({ account }) => {
   return (
-    <div className="w-full p-4 lg:p-8 max-w-5xl">
+    <div>
       <Tabs.Root className="flex flex-col" defaultValue="polls">
         <Tabs.List
           className="shrink-0 flex border-b border-gray-300 dark:border-neutral-800"
@@ -38,6 +39,14 @@ const Platform: FC<PlatformProps> = ({ account }) => {
           className="grow py-5 outline-none focus:shadow-[0_0_0_2px] focus:shadow-black"
           value="polls"
         >
+          <div className="mb-6 flex">
+            <Link
+              href="/create-poll"
+              className="bg-blue-500 text-white py-3 px-5 text-center rounded-full"
+            >
+              Create Poll
+            </Link>
+          </div>
           <Polls
             userAddress={account.address}
             getPoll={getPoll}

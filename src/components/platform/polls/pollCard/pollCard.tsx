@@ -29,7 +29,7 @@ const PollCard: FC<PollCardProps> = ({ pollId, userAddress, getPoll }) => {
   if (!poll) return <div>Loading</div>;
 
   const voteCount = poll.votes.length;
-  const isExpired = new Date().getTime() > poll.expirationDate;
+  const isExpired = new Date().getTime() / 1000 > poll.expirationDate;
   return (
     <div className="border-gray-300 dark:border-neutral-800 bg-gradient-to-b from-zinc-200 p-6 backdrop-blur-2xl dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 min-w-full lg:min-w-[580px]">
       <h3 className="text-xl font-medium">{poll.title}</h3>

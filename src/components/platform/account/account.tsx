@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { PollCard } from "../polls/pollCard";
 import { getPoll } from "@/api/poll";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface AccountProps {
   userAddress: string;
@@ -64,15 +65,15 @@ const Account: FC<AccountProps> = ({ userAddress, getAccount, logout }) => {
       <section>
         <div className="flex justify-between items-center">
           <h3 className="text-lg">Your Polls</h3>
-          <button
-            type="button"
-            className="bg-blue-500 py-3 px-5 text-center rounded-full"
+          <Link
+            href="/create-poll"
+            className="bg-blue-500 text-white py-3 px-5 text-center rounded-full"
           >
             Create Poll
-          </button>
+          </Link>
         </div>
         <div className="flex flex-col mt-8 gap-6">
-          {account.forYou.polls.map((pollId) => (
+          {[...account.forYou.polls].reverse().map((pollId) => (
             <PollCard
               key={pollId}
               pollId={pollId}
