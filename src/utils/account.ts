@@ -10,6 +10,7 @@ interface Account {
 const LOCAL_STORAGE_KEY = "USER_ACCOUNT";
 
 export const setupAccount = async (passphrase: string) => {
+  if (typeof window === "undefined") return;
   const address = await getAddressFromPassphrase(passphrase);
   const account = {
     address: address,
@@ -19,6 +20,7 @@ export const setupAccount = async (passphrase: string) => {
 };
 
 export const getAccount = (): Account | null => {
+  if (typeof window === "undefined") return null;
   const account = localStorage.getItem(LOCAL_STORAGE_KEY);
   if (!account) return null;
 
