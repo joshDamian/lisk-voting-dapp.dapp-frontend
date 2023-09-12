@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 import useSWR from "swr";
 
@@ -31,7 +32,8 @@ const PollCard: FC<PollCardProps> = ({ pollId, userAddress, getPoll }) => {
   const voteCount = poll.votes.length;
   const isExpired = new Date().getTime() / 1000 > poll.expirationDate;
   return (
-    <div className="border-gray-300 dark:border-neutral-800 bg-gradient-to-b from-zinc-200 p-6 backdrop-blur-2xl dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 min-w-full lg:min-w-[580px]">
+    <div className="border-gray-300 dark:border-neutral-800 bg-gradient-to-b from-zinc-200 p-6 backdrop-blur-2xl dark:bg-zinc-800/30 dark:from-inherit rounded-xl border bg-gray-200 min-w-full lg:min-w-[580px] relative">
+      <Link href={`/polls/${poll.id}`} className="absolute inset-0 z-50" />
       <h3 className="text-xl font-medium">{poll.title}</h3>
       <p className="opacity-50 py-4 line-clamp-1">{poll.description}</p>
       <div className="flex items-center justify-between">

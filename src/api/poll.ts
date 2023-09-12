@@ -52,3 +52,25 @@ export const createPoll = async (payload: {
   );
   await liskClient.transaction.send(tx);
 };
+
+export const vote = async (pollId: string, option: string) => {
+  const account = getAccount();
+  if (!account) throw new Error("Authenticate first");
+  const liskClient = await getLiskClient();
+
+  const sk = await extractPrivateKey(account.passphrase);
+
+  const tx = await liskClient.transaction.create(
+    {
+      module: "poll",
+      command: "voteOnPoll",
+      fee: BigInt(convertLSKToBeddows("0.1")),
+      params: {
+        pollId,
+        option,
+      },
+    },
+    sk.toString("hex")
+  );
+  await liskClient.transaction.send(tx);
+};
